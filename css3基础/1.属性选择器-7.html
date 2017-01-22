@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p {
+            height: 30px;
+            border:1px solid #000;
+        }
+        /* 以“b”开始或“b-”开始的 */
+        p[data-type|=b]{
+            background-color: #c3c;
+        }
+    </style>
+</head>
+<body>
+    <p data-type="b-leo">leo</p>
+    <p data-type="b-xm">xiaomei</p>
+    <p data-type="g-du oldc">dupeng</p>
+    <p data-type="b">zishu</p>
+</body>
+</html>

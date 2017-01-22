@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            transition: 1s;
+        }
+    </style>
+    <!--
+        matrix(a, b, c, d, e, f)
+
+        位移
+        e: x轴位移
+        f: y轴位移
+
+        缩放:  a = x * a  c = x * c   x轴缩放
+              b = y * b  d = y * d   y轴缩放
+
+        旋转
+        a = Math.cos(deg / 180 * Math.PI);
+        b = Math.sin(deg / 180 * Math.PI);
+        c = -Math.sin(deg / 180 * Math.PI);
+        d = Math.cos(deg / 180 * Path.Pi);
+    -->
+</head>
+<body>
+<div class="box" id="box"></div>
+<script>
+    window.onload = function () {
+        var oBox = document.getElementById('box');
+        oBox.onclick = function () {
+            oBox.style.webkitTransform = 'matrix(0.87, 0.5, -0.5, 0.87, 0, 0)';
+            oBox.style.MozTransform = 'matrix(0.87, 0.5, -0.5, 0.87, 0, 0)';
+            oBox.style.transform = 'matrix(0.87, 0.5, -0.5, 0.87, 0, 0)';
+        };
+    }
+</script>
+</body>
+</html>

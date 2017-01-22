@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+       p{
+           width: 300px;
+           border: 1px solid #000000;
+       }
+       p:first-line{
+           background: red;
+       }
+       p:first-letter{
+           font-size: 30px;
+       }
+       p::selection{
+           background: blue;
+       }
+       p:before{
+           content: '一个人的故事';
+           display: block;
+           margin: 20px;
+           border:1px solid green;
+       }
+       p:after {
+           content: "最后的结局"
+       }
+    </style>
+</head>
+<body>
+    <p>
+        111111111111111111
+        222222222222222
+        33333333333333333
+    </p>
+</body>
+</html>

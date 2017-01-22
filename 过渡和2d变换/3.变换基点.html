@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            margin:100px auto;
+            width: 100px;
+            height: 100px;
+            background: red;
+            transition: all 2s;
+            transform-origin: right top;
+        }
+        .box:hover{
+            /*旋转*/
+            /*-webkit-transform: rotate(30deg);*/
+            /*斜切*/
+            -webkit-transform: scale(0.2) rotate(360deg);
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box"></div>
+</body>
+</html>

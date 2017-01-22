@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: red;
+            transition: 1s width;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box"></div>
+
+
+<script>
+    window.onload = function () {
+        var oBox = document.getElementById('box');
+
+        oBox.onclick = function () {
+            this.style.width = this.offsetWidth + 100 + 'px';
+            addEnd(oBox, end);
+        };
+
+
+
+        function end () {
+            removeEnd(this, end);
+            this.style.width = this.offsetWidth + 100 + 'px';
+        }
+
+        function addEnd (obj, fn) {
+            obj.addEventListener('WebkitTransitionend', fn, false);
+            obj.addEventListener('transitionend', fn, false);
+        }
+
+        function removeEnd (obj, fn) {
+            obj.removeEventListener('WebkitTransitionend', fn, false);
+            obj.removeEventListener('transitionend', fn, false);
+        }
+
+    }
+</script>
+</body>
+</html>

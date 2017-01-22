@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p {
+            height: 30px;
+            border:1px solid #000;
+        }
+        /* 指定词列表 */
+        p[data-type~=old]{
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <p data-type="bleo old">leo</p>
+    <p data-type="bxm">xiaomei</p>
+    <p data-type="bdu oldc">dupeng</p>
+    <p data-type="gzs">zishu</p>
+</body>
+</html>

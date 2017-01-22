@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #f9f9f9;
+        }
+        #menu {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 50px;
+            height: 50px;
+        }
+        #menu_list {
+            position: relative;
+            margin: 4px;
+            height: 42px;
+            width: 43px;
+        }
+        #menu_list img{
+            position: absolute;
+            left:0;
+            top: 0;
+            border-radius: 21px;
+
+            -webkit-transition: 0.5s all ease;
+            transition: 0.5s all ease;
+        }
+        #home {
+            position: absolute;
+            left:0;
+            top:0;
+            width: 50px;
+            height: 50px;
+            background: url(home.png) no-repeat;
+            border-radius: 25px;
+
+            -webkit-transition: 0.5s all ease;
+            transition: 0.5s all ease;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <div id="menu_list">
+            <img src="prev.png" alt="">
+            <img src="open.png" alt="">
+            <img src="clos.png" alt="">
+            <img src="full.png" alt="">
+            <img src="refresh.png" alt="">
+        </div>
+        <div id="home"></div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        var oHome = document.getElementById('home');
+        var aImg = document.getElementById('menu_list').getElementsByTagName('img');
+        var buff = true;
+        var iR = -150;
+
+        oHome.onclick = function () {
+            if(buff) {
+                this.style.webkitTransform = 'rotate(-360deg)';
+                for(var i = 0; i < aImg.length; i++) {
+                    var oLT = toLT(iR,  90 / 4 * i);
+                    aImg[i].style.transition = '0.5s ' + i * 100 + 'ms';
+                    aImg[i].style.top = oLT.l + 'px';
+                    aImg[i].style.left = oLT.t + 'px';
+                    aImg[i].style.webkitTransform = 'rotate(-720deg)'
+                }
+
+            }else{
+                this.style.webkitTransform = 'rotate(0deg)';
+                for(var i = 0; i < aImg.length; i++) {
+                    aImg[i].style.transition = '0.5s ' + (aImg.length - 1 - i) * 100 + 'ms';
+                    aImg[i].style.top = '0px';
+                    aImg[i].style.left = '0px';
+                    aImg[i].style.webkitTransform = 'rotate(0deg)'
+                }
+            }
+            buff = !buff;
+        };
+
+        function toLT (iR, iDeg) {
+            var iLeft = Math.round(Math.sin(iDeg / 180 * Math.PI) * iR);
+            var iTop = Math.round(Math.cos(iDeg / 180 * Math.PI) * iR);
+
+            return {
+                l: iLeft,
+                t: iTop
+            }
+        }
+    }
+</script>
+</html>

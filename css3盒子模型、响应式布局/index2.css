@@ -1,0 +1,9 @@
+.wrap{
+    border:1px solid #ddd;
+    font: 16px/28px;
+    color:#333;
+    text-indent: 2em;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 10px;
+    -webkit-column-rule: 1px solid red;
+}
