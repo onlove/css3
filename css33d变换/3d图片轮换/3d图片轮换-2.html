@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #wrap {
+            position: relative;
+            margin: 40px auto 0;
+            width: 400px;
+            height: 300px;
+            perspective: 800px;
+            -webkit-perspective: 800px;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+        }
+        img{
+            position: absolute;
+            left:0;
+            top: 0;
+            width: 400px;
+            height: 300px;
+
+            transform-origin: bottom;
+            -webkit-transform-origin: bottom;
+            transform: rotateX(-180deg);
+            -webkit-transform: rotateX(-180deg);
+            opacity: 0;
+        }
+        #wrap input {
+            position: absolute;
+            top: 100px;
+            margin: 0;
+            padding: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ccc;
+
+            outline: none;
+        }
+        #wrap input:nth-of-type(1) {
+            left: -100px;
+        }
+        #wrap input:nth-of-type(2) {
+            right: -100px;
+        }
+
+        .show {
+            -webkit-transform: rotateX(0deg);
+            transform: rotateX(0deg);
+            opacity:1;
+
+            -webkit-animation: 1s show;
+            animation: 1s show;
+        }
+
+        .hide {
+            -webkit-transform: rotateX(180deg);
+            transform: rotateX(180deg);
+            opacity:0;
+
+            -webkit-animation: .6s hide;
+            animation: .6s hide;
+        }
+
+        @keyframes show {
+            0% {
+                -webkit-transform: rotateX(180deg);
+                transform: rotateX(180deg);
+                opacity: 0;
+            }
+            50% {
+                -webkit-transform: rotateX(-25deg);
+                transform: rotateX(-25deg);
+                opacity: 1;
+            }
+            60% {
+                -webkit-transform: rotateX(18deg);
+                transform: rotateX(18deg);
+                opacity: 1;
+            }
+            70% {
+                -webkit-transform: rotateX(-12deg);
+                transform: rotateX(-12deg);
+                opacity: 1;
+            }
+            80% {
+                -webkit-transform: rotateX(8deg);
+                transform: rotateX(8deg);
+                opacity: 1;
+            }
+            90% {
+                -webkit-transform: rotateX(-6deg);
+                transform: rotateX(-6deg);
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: rotateX(0deg);
+                transform: rotateX(0deg);
+                opacity:1;
+            }
+        }
+        @-webkit-keyframes show {
+            0% {
+                -webkit-transform: rotateX(180deg);
+                transform: rotateX(180deg);
+                opacity: 0;
+            }
+            50% {
+                -webkit-transform: rotateX(-25deg);
+                transform: rotateX(-25deg);
+                opacity: 1;
+            }
+            60% {
+                -webkit-transform: rotateX(18deg);
+                transform: rotateX(18deg);
+                opacity: 1;
+            }
+            70% {
+                -webkit-transform: rotateX(-12deg);
+                transform: rotateX(-12deg);
+                opacity: 1;
+            }
+            80% {
+                -webkit-transform: rotateX(8deg);
+                transform: rotateX(8deg);
+                opacity: 1;
+            }
+            90% {
+                -webkit-transform: rotateX(-6deg);
+                transform: rotateX(-6deg);
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: rotateX(0deg);
+                transform: rotateX(0deg);
+                opacity:1;
+            }
+        }
+        @keyframes hide {
+            0% {
+                -webkit-transform: rotateX(0deg);
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: rotateX(-180deg);
+                transform: rotateX(-180deg);
+                opacity:0;
+            }
+        }
+        @-webkit-keyframes hide {
+            0% {
+                -webkit-transform: rotateX(0deg);
+                transform: rotateX(0deg);
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: rotateX(-180deg);
+                transform: rotateX(-180deg);
+                opacity:0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <input type="button" value="上一张">
+        <img src="img/img1.jpg" alt="" class="show"/>
+        <img src="img/img2.jpg" alt=""/>
+        <img src="img/img3.jpg" alt=""/>
+        <img src="img/img4.jpg" alt=""/>
+        <img src="img/img5.jpg" alt=""/>
+        <input type="button" value="下一张">
+    </div>
+    <script>
+        window.onload = function () {
+            var oWrap = document.getElementById('wrap');
+            var aBtns = oWrap.getElementsByTagName('input');
+            var aImage = oWrap.getElementsByTagName('img');
+            var iNow = 0;
+
+            aBtns[0].onclick = function () {
+                aImage[iNow].className = 'hide';
+                iNow--;
+                if (iNow < 0) {
+                    iNow = aImage.length - 1;
+                }
+                aImage[iNow].className = 'show';
+            };
+
+            aBtns[1].onclick = function () {
+                aImage[iNow].className = 'hide';
+                iNow++;
+                if (iNow >= aImage.length) {
+                    iNow = 0;
+                }
+                aImage[iNow].className = 'show';
+            };
+        }
+    </script>
+</body>
+</html>

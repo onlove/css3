@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #wrap {
+            margin: 0 auto;
+            width: 500px;
+
+            -webkit-perspective: 800px;
+            perspective: 800px;
+            -webkit-transform-style:preserve-3d;
+            transform-style:preserve-3d;
+        }
+        #wrap div {
+            position: absolute;
+            top: 102px;
+            left: 0;
+            width: 500px;
+            height: 100px;
+            background: #ccc;
+
+            -webkit-transform-style:preserve-3d;
+            transform-style:preserve-3d;
+
+            -webkit-transform-origin: top;
+            transform-origin: top;
+        }
+        #wrap span {
+            display: block;
+            height: 100px;
+            border: 1px solid #000;
+            background: #ccc;
+        }
+        #wrap>div:nth-of-type(1) {
+            top:0;
+        }
+        /*#wrap div:nth-of-type(2) {*/
+            /*-webkit-transform-origin: top;*/
+            /*transform-origin: top;*/
+            /*-webkit-transform: rotateX(-45deg);*/
+            /*transform: rotateX(-45deg);*/
+        /*}*/
+        /*#wrap div:nth-of-type(3) {*/
+            /*-webkit-transform-origin: top;*/
+            /*transform-origin: top;*/
+            /*-webkit-transform: rotateX(45deg);*/
+            /*transform: rotateX(45deg);*/
+        /*}*/
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <!--<div>1</div>-->
+        <!--<div>2</div>-->
+        <!--<div style="height: auto"></div>-->
+        <!--<div>3</div>-->
+        <!--<div>4</div>-->
+        <div style="-webkit-transform: rotateX(-45deg)">
+            <span>1</span>
+            <div style="-webkit-transform: rotateX(90deg)">
+                <span>2</span>
+                <div style="-webkit-transform: rotateX(-90deg)">
+                    <span>3</span>
+                    <div style="-webkit-transform: rotateX(90deg)">
+                        <span>4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
