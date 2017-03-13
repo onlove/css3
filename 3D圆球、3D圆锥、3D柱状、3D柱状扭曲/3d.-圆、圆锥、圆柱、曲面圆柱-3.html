@@ -6,8 +6,15 @@
     <link rel="stylesheet" href="reset.css">
     <style>
         body{
-            height: 100%;
+
             overflow: hidden;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            background: url(image/yuyue_bg.jpg) no-repeat center;
+            height: 100%;
+            background-size: 100% 100%;
+            font-family: '微软雅黑';
         }
         .sence {
             position: relative;
@@ -168,6 +175,9 @@
             border: 1px solid #b3b8bb;
             background: #fff;
             border-radius: 8px;
+            opacity: 0;
+            transform: scale(.5);
+            transition: all .5s ease;
         }
         .text p {
             margin-bottom:15px;
@@ -252,10 +262,16 @@
             var aLi = oUl.getElementsByTagName('li');
             var oTable = document.getElementsByClassName('table')[0];
             var aA = oTable.getElementsByTagName('a');
+
             var oItem = document.getElementsByClassName('item')[0];
             var oP = oItem.getElementsByTagName('p')[0];
             var oClose = oItem.getElementsByTagName('a')[0];
             var aBtn = document.getElementsByClassName('btn')[0].getElementsByTagName('button');
+
+            var oText = document.getElementsByClassName('text')[0];
+            var oTextArea = oText.getElementsByTagName('textarea')[0];
+            var oClose2 = oText.getElementsByTagName('a')[0];
+            var aBtn2 = oText.getElementsByTagName('button');
 
             var num = 0;
             var layer = 0;
@@ -267,83 +283,103 @@
             var columnH = 0;
             var columnNum = 0;
             var graph = 0;
+            var theta =0;
+            var phi = 0;
+            var r = 0;
+
+
             var timer = null;
             var angleX = 0;
             var angleY = 0;
 
-            oP.innerHTML = str;
+            star();
 
-            for(var i = 4; i < 13; i++){
-                num = i * i + (i + 1) *  (i + 1);
-                if(num >= str.length) {
+            function star () {
+
+                num = 0;
+                layer = 0;
+                wordNum = -1;
+                circleArr = [];
+                coneArr = [];
+                coneNum = 0;
+                liNum = 0;
+                columnH = 0;
+                columnNum = 0;
+                graph = 0;
+
+                oP.innerHTML = str;
+
+                for(var i = 4; i < 13; i++){
+                    num = i * i + (i + 1) *  (i + 1);
+                    if(num >= str.length) {
+                        layer = (i - 1) * 2 + 1;
+                        break;
+                    }
                     layer = (i - 1) * 2 + 1;
-                    break;
-                }
-                layer = (i - 1) * 2 + 1;
-            }
-
-            for(var i = 0; i < layer; i++) {
-                if(i < (layer + 1) / 2) {
-                    wordNum += 2;
-                }else{
-                    wordNum -= 2;
-                }
-                circleArr.push(wordNum)
-            }
-            var theta = Math.PI / (circleArr.length - 1);
-            var phi = 0;
-            var r = 150;
-
-            num = 0;
-            for(var i = 0; i < circleArr.length; i++) {
-                phi = 2 * Math.PI / circleArr[i];
-                for(var j = 0; j < circleArr[i]; j++){
-                    var li = document.createElement('li');
-                    li.innerHTML = str[num];
-                    num++;
-                    drawCircle(li, theta, phi, i, j);
-                    oUl.appendChild(li);
-                }
-            }
-            for(var i = 0; i < aLi.length; i++){
-                aLi[i].style.transform = 'translate3d('+ aLi[i].circleX +'px,'+ aLi[i].circleY +'px,'+aLi[i].circleZ+'px) rotateY('+ aLi[i].circlePhi +'rad) rotateX('+ aLi[i].circleTheta +'rad)'
-            }
-
-
-            // 圆锥
-            for (var i = 0; i < aLi.length; i++) {
-                coneNum += 2 * i + 1;
-                if (coneNum > aLi.length) {
-                    coneNum -= 2 * i + 1;
-                    break;
-
-                }
-                coneArr.push(2 * i + 1);
-            }
-            for (var i = 0; i < coneArr.length; i++) {
-                phi = 2 * Math.PI / coneArr[i];
-                for (var j = 0; j < coneArr[i]; j++) {
-                    drawCone(aLi[liNum], phi, i, j);
-                    liNum++;
                 }
 
-            }
-
-            // 圆柱、曲面圆柱
-            columnH = Math.floor(aLi.length / (circleArr.length - 2));
-            columnNum = (circleArr.length - 2) * columnH;
-            liNum = 0;
-            for (var i = 0; i < circleArr.length - 1; i++) {
-                phi = 2 * Math.PI / columnH;
-                for (var j = 0; j < columnH; j++) {
-                    drawColumn(aLi[liNum], phi, i, j);
-                    drawColumn2(aLi[liNum], phi, i, j);
-                    liNum++;
+                for(var i = 0; i < layer; i++) {
+                    if(i < (layer + 1) / 2) {
+                        wordNum += 2;
+                    }else{
+                        wordNum -= 2;
+                    }
+                    circleArr.push(wordNum)
                 }
 
+                theta = Math.PI / (circleArr.length - 1);
+                phi = 0;
+                r = 150;
+
+                num = 0;
+                for(var i = 0; i < circleArr.length; i++) {
+                    phi = 2 * Math.PI / circleArr[i];
+                    for(var j = 0; j < circleArr[i]; j++){
+                        var li = document.createElement('li');
+                        li.innerHTML = str[num];
+                        num++;
+                        drawCircle(li, theta, phi, i, j);
+                        oUl.appendChild(li);
+                    }
+                }
+
+                // 圆锥
+                for (var i = 0; i < aLi.length; i++) {
+                    coneNum += 2 * i + 1;
+                    if (coneNum > aLi.length) {
+                        coneNum -= 2 * i + 1;
+                        break;
+
+                    }
+                    coneArr.push(2 * i + 1);
+                }
+                for (var i = 0; i < coneArr.length; i++) {
+                    phi = 2 * Math.PI / coneArr[i];
+                    for (var j = 0; j < coneArr[i]; j++) {
+                        drawCone(aLi[liNum], phi, i, j);
+                        liNum++;
+                    }
+
+                }
+
+                // 圆柱、曲面圆柱
+                liNum = 0;
+                columnH = Math.floor(aLi.length / (circleArr.length - 2));
+                columnNum = columnH * (circleArr.length - 2);
+                for (var i = 0; i < circleArr.length - 1; i++) {
+                    phi = 2 * Math.PI / columnH;
+                    for (var j = 0; j < columnH; j++) {
+                        drawColumn(aLi[liNum], phi, i, j);
+                        drawColumn2(aLi[liNum], phi, i, j);
+                        liNum++;
+                    }
+
+                }
+
+                for(var i = 0; i < aLi.length; i++){
+                    aLi[i].style.transform = 'translate3d('+ aLi[i].circleX +'px,'+ aLi[i].circleY +'px,'+aLi[i].circleZ+'px) rotateY('+ aLi[i].circlePhi +'rad) rotateX('+ aLi[i].circleTheta +'rad)'
+                }
             }
-
-
 
             aA[0].onclick = function () {
                 clearTimeout(timer);
@@ -462,6 +498,43 @@
                     oItem.style.transform = 'rotateX(0deg) scale(2)';
                     oItem.style.display = 'none';
                 }, 550)
+            };
+
+            aBtn[1].onclick = function () {
+                this.className = 'active';
+                oText.style.display= 'block';
+                setTimeout(function () {
+                    oText.style.transform = 'scale(1)';
+                    oText.style.opacity = 1;
+                }, 12);
+            };
+
+            aBtn2[0].onclick = function () {
+                str = oTextArea.value;
+                if(str.length < 50 || str.length > 350) {
+                    alert('您输入的文字不得小于20或大于350')
+                }else{
+                    oUl.innerHTML = '';
+                    star();
+                    oText.style.transform = 'scale(.5)';
+                    oText.style.opacity = 1;
+                    setTimeout(function () {
+                        oText.style.display = 'none';
+                    }, 12)
+                }
+            };
+
+            aBtn2[1].onclick = function () {
+                oTextArea.value = '';
+            };
+
+            oClose2.onclick = function () {
+                oTextArea.value = '';
+                oText.style.transform = 'scale(.5)';
+                oText.style.opacity = 1;
+                setTimeout(function () {
+                    oText.style.display = 'none';
+                }, 12)
             };
 
             var iTimer = setInterval(function () {
