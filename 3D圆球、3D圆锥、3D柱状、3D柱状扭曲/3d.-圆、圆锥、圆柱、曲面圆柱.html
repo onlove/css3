@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        .sence {
+            position: relative;
+            margin: 0 auto;
+            width: 400px;
+            height: 400px;
+
+            perspective: 800px;
+            -webkit-perspective: 800px;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+            border: 1px solid #000;
+        }
+        .box{
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+        }
+        .ring {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        .ring li {
+            position: absolute;
+        }
+        .item {
+            display: none;
+            position: absolute;
+            top: 100px;
+            width: 100%;
+            border: 1px solid #000;
+        }
+        .item p {
+            font: 14px/24px '微软雅黑';
+            word-break: break-all;
+        }
+        .item a {
+            position: absolute;
+            top: -30px;
+            right:  -30px;
+            width: 19px;
+            height: 19px;
+            background: url(image/close.png) no-repeat center center    ;
+        }
+        .table{
+            margin: 20px auto 10px;
+            width: 400px;
+            overflow: hidden;
+        }
+        .table a{
+            float: left;
+            padding-top:94px;
+            width: 25%;
+            height: 12px;
+            font: 12px/1 '微软雅黑';
+            text-align: center;
+            color: #889199;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+        .table a:nth-of-type(1) {
+            background-image: url(image/circle.png);
+        }
+        .table a:nth-of-type(2) {
+            background-image: url(image/Cone.png);
+        }
+        .table a:nth-of-type(3) {
+            background-image: url(image/Column.png);
+        }
+        .table a:nth-of-type(4) {
+            background-image: url(image/Column2.png);
+        }
+        .table a:nth-of-type(1):hover {
+            background-image: url(image/circle-hover.png);
+        }
+        .table a:nth-of-type(2):hover {
+            background-image: url(image/Cone-hover.png);
+        }
+        .table a:nth-of-type(3):hover {
+            background-image: url(image/Column-hover.png);
+        }
+        .table a:nth-of-type(4):hover {
+            background-image: url(image/Column2-hover.png);
+        }
+        .table a:nth-of-type(1).active {
+            background-image: url(image/circle-active.png);
+        }
+        .table a:nth-of-type(2).active {
+            background-image: url(image/Cone-active.png);
+        }
+        .table a:nth-of-type(3).active {
+            background-image: url(image/Column-active.png);
+        }
+        .table a:nth-of-type(4).active {
+            background-image: url(image/Column2-active.png);
+        }
+        .line {
+            margin: 0 auto 14px;
+            width: 734px;
+            height: 1px;
+            background: -webkit-linear-gradient(left, #7ecdf4, #8cca94, #fff45c);
+            background: linear-gradient(left, #7ecdf4, #8cca94, #fff45c);
+        }
+        .btn {
+            margin: 0 auto;
+            width: 204px;
+            height: 30px;
+            overflow: hidden;
+        }
+        button {
+            float: left;
+            width: 100px;
+            height: 100%;
+            border: 1px solid #cacaca;
+            color: #889199;
+            background: -webkit-linear-gradient(#fff, #d6e1eb);
+            background: linear-gradient(#fff, #d6e1eb);
+            cursor: pointer;
+        }
+        button:hover{
+            background: -webkit-linear-gradient(#bef5ff, #77c5eb);
+            background: linear-gradient(#bef5ff, #77c5eb);
+            color: #00a0e9;
+        }
+        button.active{
+            background: -webkit-linear-gradient(#77c5eb, #bef5ff);
+            background: linear-gradient(#77c5eb, #bef5ff);
+            color: #00a0e9;
+        }
+        button:nth-of-type(1) {
+            border-radius: 15px 0 0 15px;
+        }
+        button:nth-of-type(2) {
+            margin-left:-1px;
+            border-radius: 0 15px 15px 0;
+        }
+        .text{
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            margin-left:-329px;
+            padding: 15px 18px;
+            width: 602px;
+            height: 318px;
+            border: 1px solid #b3b8bb;
+            background: #fff;
+            border-radius: 8px;
+        }
+        .text p {
+            margin-bottom:15px;
+            font-size: 12px;
+        }
+        .text textarea {
+            padding: 10px;
+            margin-bottom:15px;
+            width: 580px;
+            height: 220px;
+            border: 1px solid #cacaca;
+            border-radius: 8px;
+            background: #f3f7fa;
+            resize: none;
+        }
+        .btn2 {
+            margin: 0 auto;
+            width: 260px;
+            height: 30px;
+            overflow: hidden;
+        }
+        .btn2 button {
+            float: left;
+            width: 120px;
+            height: 100%;
+            border:1px solid #cacaca;
+            border-radius: 15px;
+        }
+        .btn2 button:nth-of-type(1){
+            margin-right:15px;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 19px;
+            height: 19px;
+            background: url(image/close.png) no-repeat center center;
+        }
+    </style>
+</head>
+<body>
+    <div class="sence" id="sence">
+        <div class="box">
+            <ul class="ring">
+
+            </ul>
+        </div>
+        <div class="item">
+            <p></p>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+    <div class="table">
+        <a href="javascript:;">圆球</a>
+        <a href="javascript:;">圆锥</a>
+        <a href="javascript:;">圆柱</a>
+        <a href="javascript:;">柱状扭曲</a>
+    </div>
+    <div class="line"></div>
+    <div class="btn">
+        <button class="active">展开</button>
+        <button>自定义文字</button>
+    </div>
+    <div class="text">
+        <p>在下面输入你自己的文字(建议50~350字)</p>
+        <textarea></textarea>
+        <div class="btn2">
+            <button>提交</button>
+            <button>重置</button>
+        </div>
+        <a href="javascript:;" class="close"></a>
+    </div>
+    <script>
+        var arr  = [1, 3, 5, 7, 9 ,11, 13, 11, 9, 7, 5, 3, 1];
+        var str = '为了充分利用浏览器缓存，HTTP header 里的 cache-control 可以让浏览器一段时间内不用向服务器发起请求，last-modified 又可以让『过期的』响应在再次请求时通过 304 未修改响应继续使用而不用重新传输。但你曾想过，对于静态资源来说，可能这些获得 304 响应的请求也是多余的？本篇文章就讲了 Facebook 团队如何与 Chrome 团队合作，通过对浏览器缓存优化利用，从而使浏览器发向 其服务器的不必要请求大大减少。';
+        window.onload = function () {
+
+            var oSence = document.getElementById('sence');
+            var oBox = oSence.getElementsByClassName('box')[0];
+            var oUl = oBox.getElementsByTagName('ul')[0];
+            var aLi = oUl.getElementsByTagName('li');
+
+            var num = 0;
+            var layer = 0;
+            var wordNum = -1;
+            var circleArr = [];
+            var coneArr = [];
+            var coneNum = 0;
+            var liNum = 0;
+            var columnH = 0;
+            var columnNum = 0;
+
+            for(var i = 4; i < 13; i++){
+                num = i * i + (i + 1) *  (i + 1);
+                if(num >= str.length) {
+                    layer = (i - 1) * 2 + 1;
+                    break;
+                }
+                layer = (i - 1) * 2 + 1;
+            }
+
+            for(var i = 0; i < layer; i++) {
+                if(i < (layer + 1) / 2) {
+                    wordNum += 2;
+                }else{
+                    wordNum -= 2;
+                }
+                circleArr.push(wordNum)
+            }
+            var theta = Math.PI / (circleArr.length - 1);
+            var phi = 0;
+            var r = 150;
+
+            num = 0;
+            for(var i = 0; i < circleArr.length; i++) {
+                phi = 2 * Math.PI / circleArr[i];
+                for(var j = 0; j < circleArr[i]; j++){
+                    var li = document.createElement('li');
+                    li.innerHTML = str[num];
+                    num++;
+                    drawCircle(li, theta, phi, i, j);
+                    oUl.appendChild(li);
+                }
+            }
+            for(var i = 0; i < aLi.length; i++){
+                aLi[i].style.transform = 'translate3d('+ aLi[i].circleX +'px,'+ aLi[i].circleY +'px,'+aLi[i].circleZ+'px) rotateY('+ aLi[i].circlePhi +'rad) rotateX('+ aLi[i].circleTheta +'rad)'
+            }
+
+
+
+            for (var i = 0; i < aLi.length; i++) {
+                coneNum += 2 * i + 1;
+                if (coneNum > aLi.length) {
+                    coneNum -= 2 * i + 1;
+                    break;
+
+                }
+                coneArr.push(2 * i + 1);
+            }
+            for (var i = 0; i < coneArr.length; i++) {
+                phi = 2 * Math.PI / coneArr[i];
+                for (var j = 0; j < coneArr[i]; j++) {
+                    drawCone(aLi[liNum], phi, i, j);
+                    liNum++;
+                }
+
+            }
+            for (var i = 0; i < aLi.length; i++) {
+                aLi[i].style.display = "none";
+            }
+            for (var i = 0; i < coneNum; i++) {
+                aLi[i].style.display = "block";
+                aLi[i].style.transform = 'translate3d(' + aLi[i].coneX + 'px,' + aLi[i].coneY + 'px,' + aLi[i].coneZ + 'px) rotateY(' + aLi[i].conePhi + 'rad) rotateX(' + aLi[i].coneTheta + 'rad)';
+            }
+
+
+
+
+            columnH = Math.floor(aLi.length / (circleArr.length - 2));
+            columnNum = (circleArr.length - 2) * columnH;
+            liNum = 0;
+            for (var i = 0; i < circleArr.length - 1; i++) {
+                phi = 2 * Math.PI / columnH;
+                for (var j = 0; j < columnH; j++) {
+                    drawColumn(aLi[liNum], phi, i, j);
+                    drawColumn2(aLi[liNum], phi, i, j);
+                    liNum++;
+                }
+
+            }
+            for (var i = 0; i < columnNum; i++) {
+                aLi[i].style.display = 'block';
+                aLi[i].style.transform = 'translate3d(' + aLi[i].columnX + 'px,' + aLi[i].columnY + 'px,' + aLi[i].columnZ + 'px) rotateY(' + aLi[i].columnPhi + 'rad)';
+            }
+
+
+            var angleX = 0;
+            setInterval(function () {
+                angleX++;
+                oBox.style.transform = 'rotateX('+ angleX + 'deg) rotateY('+ angleX +'deg)'
+            }, 60);
+
+
+
+
+
+            function drawCone(obj, phi, i, j) {
+                obj.coneX = (2 * r / coneArr.length) * i * Math.tan(Math.PI / 6) * Math.sin(phi * j) + 200;
+                obj.coneY = (2 * r / coneArr.length) * i;
+                obj.coneZ = (2 * r / coneArr.length) * i * Math.tan(Math.PI / 6) * Math.cos(phi * j);
+                obj.coneTheta = Math.PI / 6;
+                obj.conePhi = phi * j;
+            }
+
+
+
+            function drawCircle (obj, theta, phi, i, j) {
+                obj.circleX = r * Math.sin(theta * i) * Math.sin(phi * j) + 200;
+                obj.circleY = - r * Math.cos(theta * i) + 200;
+                obj.circleZ = r * Math.sin(theta * i) * Math.cos(phi * j);
+
+                obj.circleTheta =  theta * (circleArr.length - i) - Math.PI / 2;
+                obj.circlePhi = phi * j;
+            }
+
+
+            function drawColumn (obj, phi, i, j) {
+                obj.columnX = r / 1.5 * Math.sin(phi * j) + 200;
+                obj.columnY = 2 * r / (circleArr.length -2 ) * i + 50;
+                obj.columnZ = r / 1.5 * Math.cos(phi * j);
+                obj.columnPhi = phi * j;
+            }
+
+
+            function drawColumn2 (obj, phi, i, j) {
+                obj.columnX = r / 1.5 * Math.sin(phi * j + i * 8 * Math.PI / 180) + 200;
+                obj.columnY = 2 * r / (circleArr.length -2 ) * i + 50;
+                obj.columnZ = r / 1.5 * Math.cos(phi * j + i * 8 * Math.PI / 180);
+                obj.columnPhi = phi * j + i * 8 * Math.PI / 180;
+            }
+
+
+
+        }
+    </script>
+</body>
+</html>
